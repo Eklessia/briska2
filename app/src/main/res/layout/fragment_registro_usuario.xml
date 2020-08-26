@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="ContentDescription">
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/ingrese_nombre"
+        android:hint="@string/ingrese_nombre" />
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_rut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/ingrese_rut"
+        android:hint="@string/ingrese_rut" />
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/ingrese_email"
+        android:hint="@string/ingrese_email" />
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/ingrese_pass"
+        android:hint="@string/ingrese_pass" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_registrar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/registro" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_volver"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/volver" />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "445003720478",
+    "firebase_url": "https://briska-a7bd5.firebaseio.com",
+    "project_id": "briska-a7bd5",
+    "storage_bucket": "briska-a7bd5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445003720478:android:40bf68bc279d437ffb4b0f",
+        "android_client_info": {
+          "package_name": "cl.malditosnakamas.briska"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "445003720478-2688ga6tincbl647p1mar4mhl8en1cod.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDh0VRDTAI4xVR2-wiD9VWPhQYbM5j1hNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "445003720478-2688ga6tincbl647p1mar4mhl8en1cod.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

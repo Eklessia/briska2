@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Briska</string>
+    <string name="ingrese_nombre">Ingrese Nombre</string>
+    <string name="ingrese_rut">Ingrese Rut</string>
+    <string name="ingrese_email">Ingrese Email</string>
+    <string name="ingrese_pass">Ingrese Password</string>
+    <string name="registro">Registro</string>
+    <string name="volver">Volver</string>
+    <string name="entrar">Entrar</string>
+</resources>
