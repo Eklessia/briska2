@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cl.malditosnakamas.briska.registro.domain.RegistrarUsuarioUseCase
 import cl.malditosnakamas.briska.registro.domain.RegistroUsuario
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -29,7 +30,11 @@ class RegistroUsuarioViewModel(
     }
 
     private fun handleError(exception: Exception) {
-        liveData.postValue(RegistroUiState.ErrorRegistroUiState(exception))
+        if (exception is FirebaseAuthUserCollisionException) {
+            liveData.postValue(RegistroUiState.InvalidEmailRegistroUiState)
+        } else {
+            liveData.postValue(RegistroUiState.ErrorRegistroUiState(exception))
+        }
     }
 
     private fun handleResult(result: Boolean) {

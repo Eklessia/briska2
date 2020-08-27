@@ -1,4 +1,4 @@
-package cl.malditosnakamas.briska.registro.presentation
+package cl.malditosnakamas.briska.registro.ui
 
 import android.os.Bundle
 import android.view.View
@@ -10,15 +10,15 @@ import cl.malditosnakamas.briska.databinding.FragmentRegistroUsuarioBinding
 import cl.malditosnakamas.briska.registro.data.remote.FirebaseRegistroUsuarioRepository
 import cl.malditosnakamas.briska.registro.domain.RegistrarUsuarioUseCase
 import cl.malditosnakamas.briska.registro.domain.RegistroUsuario
-import cl.malditosnakamas.briska.registro.domain.RegistroUsuarioRepository
-import cl.malditosnakamas.briska.utils.extensions.alert
+import cl.malditosnakamas.briska.registro.presentation.RegistroUiState
+import cl.malditosnakamas.briska.registro.presentation.RegistroUsuarioViewModel
+import cl.malditosnakamas.briska.registro.presentation.RegistroViewModelFactory
+import cl.malditosnakamas.briska.utils.extensions.*
 import com.google.firebase.auth.FirebaseAuth
 
 class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registro_usuario) {
 
     lateinit var binding: FragmentRegistroUsuarioBinding
-    lateinit var useCase: RegistrarUsuarioUseCase
-    lateinit var repository: RegistroUsuarioRepository
     lateinit var viewModel: RegistroUsuarioViewModel
     lateinit var viewModelFactory: RegistroViewModelFactory
 
@@ -32,23 +32,14 @@ class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registro_usuario) {
     }
 
     private fun setupDependencies() {
-        repository = FirebaseRegistroUsuarioRepository(FirebaseAuth.getInstance())
-        useCase = RegistrarUsuarioUseCase(repository)
-        viewModelFactory = RegistroViewModelFactory(useCase)
+        viewModelFactory =
+            RegistroViewModelFactory(
+                RegistrarUsuarioUseCase(
+                    FirebaseRegistroUsuarioRepository(FirebaseAuth.getInstance())
+                )
+            )
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(RegistroUsuarioViewModel::class.java)
-    }
-
-    private fun setupListener() {
-        binding.apply {
-            btnRegistrar.setOnClickListener {
-                viewModel.registrarUsuario(obtenerValoresDeEditText())
-            }
-        }
-    }
-
-    private fun obtenerValoresDeEditText(): RegistroUsuario {
-        return RegistroUsuario("m4rsh4ll D. t34ch", "1-9", "m4arsh4all.d.t34ch@mn.cl", "12345678")
     }
 
     private fun setupLiveData() {
@@ -60,8 +51,43 @@ class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registro_usuario) {
         )
     }
 
+    private fun setupListener() {
+        binding.apply {
+            btnRegistrar.setOnClickListener {
+                if (isAllValidInputs()) {
+                    viewModel.registrarUsuario(obtenerValoresDeEditText())
+                }
+            }
+
+            btnVolver.setOnClickListener {
+                activity?.onBackPressed()
+            }
+        }
+    }
+
+    private fun isAllValidInputs(): Boolean {
+        binding.apply {
+            return etPass.isValidPassInput("Ingrese contraseña con 6 caracteres") ||
+                    etEmail.isValidEmailInput("Ingrese un correo valido") ||
+                    etRut.isValidRutInput("Ingrese un Rut valido") ||
+                    etNombre.isValidNameInput("Ingrese un nombre valido")
+        }
+    }
+
+    private fun obtenerValoresDeEditText(): RegistroUsuario {
+        binding.apply {
+            return RegistroUsuario(
+                etNombre.text.toString(),
+                etRut.text.toString(),
+                etEmail.text.toString(),
+                etPass.text.toString()
+            )
+        }
+    }
+
+
     private fun handleState(state: RegistroUiState) {
-        when(state){
+        when (state) {
             is RegistroUiState.LoadingRegistroUiState -> showLoading()
             is RegistroUiState.SuccessRegistroUiState -> showRegistroExitoso()
             is RegistroUiState.InvalidEmailRegistroUiState -> showEmailRegistrado()
@@ -75,6 +101,7 @@ class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registro_usuario) {
 
     private fun showEmailRegistrado() {
         alert("Email ya registrado")
+        binding.etEmail.requestFocus()
     }
 
     private fun showRegistroExitoso() {

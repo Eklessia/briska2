@@ -10,6 +10,8 @@
         android:id="@+id/et_nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:inputType="text"
         android:contentDescription="@string/ingrese_nombre"
         android:hint="@string/ingrese_nombre" />
 
@@ -18,6 +20,8 @@
         android:id="@+id/et_rut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:inputType="text"
         android:contentDescription="@string/ingrese_rut"
         android:hint="@string/ingrese_rut" />
 
@@ -26,6 +30,8 @@
         android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:inputType="textEmailAddress"
         android:contentDescription="@string/ingrese_email"
         android:hint="@string/ingrese_email" />
 
@@ -34,6 +40,8 @@
         android:id="@+id/et_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:inputType="textPassword"
         android:contentDescription="@string/ingrese_pass"
         android:hint="@string/ingrese_pass" />
 

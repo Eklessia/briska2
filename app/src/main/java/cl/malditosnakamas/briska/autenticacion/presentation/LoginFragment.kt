@@ -18,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
-    private lateinit var useCase: LoginUsuarioPassUseCase
     private lateinit var repository: AutenticacionRepository
     private lateinit var viewModel: LoginViewModel
     private lateinit var viewModelFactory: LoginViewModelFactory
@@ -30,6 +29,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding = FragmentLoginBinding.bind(view)
         setupLiveData()
         setupListener()
+    }
+
+    private fun setupDependencies() {
+        repository = FirebaseAutenticacionRepository(FirebaseAuth.getInstance())
+        viewModelFactory = LoginViewModelFactory(LoginUsuarioPassUseCase(repository))
+        viewModel = ViewModelProvider(
+            this,
+            viewModelFactory
+        ).get(LoginViewModel::class.java)
     }
 
     private fun setupListener() {
@@ -76,13 +84,4 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         alert("Cargando")
     }
 
-    private fun setupDependencies() {
-        repository = FirebaseAutenticacionRepository(FirebaseAuth.getInstance())
-        useCase = LoginUsuarioPassUseCase(repository)
-        viewModelFactory = LoginViewModelFactory(useCase)
-        viewModel = ViewModelProvider(
-            this,
-            viewModelFactory
-        ).get(LoginViewModel::class.java)
-    }
 }
