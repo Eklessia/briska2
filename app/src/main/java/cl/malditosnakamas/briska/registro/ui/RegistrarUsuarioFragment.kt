@@ -15,6 +15,7 @@ import cl.malditosnakamas.briska.registro.presentation.RegistroUsuarioViewModel
 import cl.malditosnakamas.briska.registro.presentation.RegistroViewModelFactory
 import cl.malditosnakamas.briska.utils.extensions.*
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registro_usuario) {
 
@@ -35,7 +36,10 @@ class RegistrarUsuarioFragment : Fragment(R.layout.fragment_registro_usuario) {
         viewModelFactory =
             RegistroViewModelFactory(
                 RegistrarUsuarioUseCase(
-                    FirebaseRegistroUsuarioRepository(FirebaseAuth.getInstance())
+                    FirebaseRegistroUsuarioRepository(
+                        FirebaseAuth.getInstance(),
+                        FirebaseDatabase.getInstance()
+                    )
                 )
             )
         viewModel =
