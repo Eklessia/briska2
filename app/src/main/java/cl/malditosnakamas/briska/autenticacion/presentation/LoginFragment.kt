@@ -43,7 +43,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun setupListener() {
         binding.apply {
             btnLogin.setOnClickListener {
-                viewModel.doLogin("m4arsh4all.d.t34ch@mn.cl","12345678")
+                viewModel.doLogin(
+                    etEmail.text.toString(),
+                    etClave.text.toString()
+                )
             }
 
             btnRegistro.setOnClickListener {

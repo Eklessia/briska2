@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_loginFragment_to_registrarUsuarioFragment"
             app:destination="@id/registrarUsuarioFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_briskerosFragment"
+            app:destination="@id/briskerosFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -27,5 +30,13 @@
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_briskerosFragment"
+            app:destination="@id/briskerosFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/briskerosFragment"
+        android:name="cl.malditosnakamas.briska.briskeros.ui.BriskerosFragment"
+        android:label="BriskerosFragment"
+        tools:layout="@layout/fragment_briskeros"/>
 </navigation>

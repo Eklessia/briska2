@@ -45,12 +45,13 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
             viewLifecycleOwner,
             Observer { state -> state?.let { handleState(it) } }
         )
+        viewModel.obtenerSession()
     }
 
     private fun handleState(state: SessionUiState) {
         when (state) {
             is SessionUiState.Loading -> showLoadingSplash()
-            is SessionUiState.SuccessSession -> goToHomeFragment()
+            is SessionUiState.SuccessSession -> goToBriskerosFragment()
             is SessionUiState.InvalidSession -> goToLoginFragment()
         }
     }
@@ -60,9 +61,9 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
             .navigate(R.id.action_splashFragment_to_loginFragment)
     }
 
-    private fun goToHomeFragment() {
+    private fun goToBriskerosFragment() {
         Navigation.findNavController(requireView())
-            .navigate(R.id.action_splashFragment_to_loginFragment)
+            .navigate(R.id.action_splashFragment_to_briskerosFragment)
     }
 
     private fun showLoadingSplash() {
