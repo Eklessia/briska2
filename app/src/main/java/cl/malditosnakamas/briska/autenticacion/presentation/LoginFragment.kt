@@ -3,6 +3,8 @@ package cl.malditosnakamas.briska.autenticacion.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -18,39 +20,32 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
-    private lateinit var repository: AutenticacionRepository
-    private lateinit var viewModel: LoginViewModel
-    private lateinit var viewModelFactory: LoginViewModelFactory
+   /* private val repository: AutenticacionRepository = FirebaseAutenticacionRepository(
+        FirebaseAuth.getInstance()
+    )
+    private val viewModel by activityViewModels<LoginViewModel> { factory }
     private lateinit var binding: FragmentLoginBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupDependencies()
         binding = FragmentLoginBinding.bind(view)
         setupLiveData()
         setupListener()
     }
 
-    private fun setupDependencies() {
-        repository = FirebaseAutenticacionRepository(FirebaseAuth.getInstance())
-        viewModelFactory = LoginViewModelFactory(LoginUsuarioPassUseCase(repository))
-        viewModel = ViewModelProvider(
-            this,
-            viewModelFactory
-        ).get(LoginViewModel::class.java)
-    }
-
     private fun setupListener() {
+
         binding.apply {
             btnLogin.setOnClickListener {
                 viewModel.doLogin(
-                    etEmail.text.toString(),
-                    etClave.text.toString()
+                    etEmailORut.text.toString(),
+                    etPass.text.toString()
                 )
             }
 
             btnRegistro.setOnClickListener {
-                Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_registrarUsuarioFragment)
+                Navigation.findNavController(it)
+                    .navigate(R.id.action_loginFragment_to_registrarUsuarioFragment)
             }
         }
     }
@@ -63,7 +58,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun handleState(state: LoginUiState) {
-        when(state){
+        when (state) {
             is LoginUiState.Loading -> showLoading()
             is LoginUiState.Success -> showSuccessView()
             is LoginUiState.InvalidUser -> showInvalidUserView()
@@ -86,5 +81,5 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun showLoading() {
         alert("Cargando")
     }
-
+*/
 }

@@ -10,7 +10,7 @@ class FirebaseSessionRepository(
 
     override suspend fun obtainSession(): Session {
         val result = firebaseAuth.currentUser
-        return Session(result?.displayName?.isNotEmpty() ?: false)
+        return Session(false)//result?.displayName?.isNotEmpty() ?: false)
     }
 
 }

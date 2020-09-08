@@ -7,4 +7,6 @@
     <string name="registro">Registro</string>
     <string name="volver">Volver</string>
     <string name="entrar">Entrar</string>
+    <string name="login_title">Qué comiencen los juegos</string>
+    <string name="ingresa_email_o_rut">Ingresa Email o Rut</string>
 </resources>

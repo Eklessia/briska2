@@ -1,6 +1,7 @@
 package cl.malditosnakamas.briska.autenticacion.presentation
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cl.malditosnakamas.briska.autenticacion.domain.LoginUsuarioPassUseCase
@@ -8,7 +9,8 @@ import cl.malditosnakamas.briska.autenticacion.domain.UserAuth
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val loginUsuarioPassUseCase: LoginUsuarioPassUseCase
+    private val loginUsuarioPassUseCase: LoginUsuarioPassUseCase,
+    private val handle: SavedStateHandle
 ) : ViewModel() {
 
     private val liveData = MutableLiveData<LoginUiState>()
