@@ -36,7 +36,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         super.onViewCreated(view, savedInstanceState)
         setupDependencies()
         binding = FragmentSplashBinding.bind(view)
-        setupLiveData()
+        //setupLiveData()
     }
 
     private fun setupDependencies() {
