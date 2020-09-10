@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_registro_usuario"/>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="cl.malditosnakamas.briska.autenticacion.presentation.LoginFragment"
+        android:name="cl.malditosnakamas.briska.autenticacion.ui.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
