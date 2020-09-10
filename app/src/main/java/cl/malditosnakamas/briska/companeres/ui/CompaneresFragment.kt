@@ -5,13 +5,17 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import cl.malditosnakamas.briska.R
+import cl.malditosnakamas.briska.companeres.data.remote.RemoteCompaneresRepository
 import cl.malditosnakamas.briska.companeres.domain.Companere
+import cl.malditosnakamas.briska.companeres.domain.ObtainCompaneresUseCase
 import cl.malditosnakamas.briska.companeres.presentation.CompaneresUiState
 import cl.malditosnakamas.briska.companeres.presentation.CompaneresViewModel
 import cl.malditosnakamas.briska.companeres.presentation.CompaneresViewModelFactory
 import cl.malditosnakamas.briska.databinding.FragmentCompaneresBinding
+import cl.malditosnakamas.briska.network.RetrofitHandler
 
 class CompaneresFragment : Fragment(R.layout.fragment_companeres), OnItemClickCompanere {
 
@@ -28,7 +32,16 @@ class CompaneresFragment : Fragment(R.layout.fragment_companeres), OnItemClickCo
     }
 
     private fun setupDependencies() {
-        TODO("Not yet implemented")
+        viewModelFactory = CompaneresViewModelFactory(
+            ObtainCompaneresUseCase(
+                RemoteCompaneresRepository(
+                    RetrofitHandler.getCompanereApi()
+                )
+            )
+        )
+        viewModel = ViewModelProvider(
+            this, viewModelFactory
+        ).get(CompaneresViewModel::class.java)
     }
 
     private fun setupRecyclerView() {
@@ -45,6 +58,7 @@ class CompaneresFragment : Fragment(R.layout.fragment_companeres), OnItemClickCo
                 it?.let { safeState -> handleState(safeState) }
             }
         )
+        viewModel.obtainCompaneres()
     }
 
     private fun handleState(safeState: CompaneresUiState) {
@@ -52,7 +66,12 @@ class CompaneresFragment : Fragment(R.layout.fragment_companeres), OnItemClickCo
             is CompaneresUiState.Loading -> showLoading()
             is CompaneresUiState.ServerError -> showErrorServerMessage()
             is CompaneresUiState.Success -> loadResult(safeState.result)
+            is CompaneresUiState.EmptyList -> showEmptyList()
         }
+    }
+
+    private fun showEmptyList() {
+        Toast.makeText(context, "Empty List", Toast.LENGTH_SHORT).show()
     }
 
     private fun loadResult(companeres: List<Companere>?) {

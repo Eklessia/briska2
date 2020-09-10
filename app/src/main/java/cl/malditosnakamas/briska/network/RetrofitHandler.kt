@@ -2,6 +2,7 @@ package cl.malditosnakamas.briska.network
 
 import cl.malditosnakamas.briska.about.data.remote.AboutApi
 import cl.malditosnakamas.briska.about.domain.About
+import cl.malditosnakamas.briska.companeres.data.remote.CompaneresApi
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -30,5 +31,9 @@ object RetrofitHandler {
 
     fun getAboutApi(): AboutApi {
         return getRetrofit().create(AboutApi::class.java)
+    }
+
+    fun getCompanereApi(): CompaneresApi {
+        return getRetrofit().create(CompaneresApi::class.java)
     }
 }

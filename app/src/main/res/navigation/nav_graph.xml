@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/companeresFragment">
 
     <fragment
         android:id="@+id/registrarUsuarioFragment"
@@ -20,7 +20,7 @@
             app:destination="@id/registrarUsuarioFragment" />
         <action
             android:id="@+id/action_loginFragment_to_briskerosFragment"
-            app:destination="@id/briskerosFragment" />
+            app:destination="@id/companeresFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -32,11 +32,11 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_splashFragment_to_briskerosFragment"
-            app:destination="@id/briskerosFragment" />
+            app:destination="@id/companeresFragment" />
     </fragment>
     <fragment
-        android:id="@+id/briskerosFragment"
-        android:name="cl.malditosnakamas.briska.briskeros.ui.BriskerosFragment"
-        android:label="BriskerosFragment"
-        tools:layout="@layout/fragment_briskeros"/>
+        android:id="@+id/companeresFragment"
+        android:name="cl.malditosnakamas.briska.companeres.ui.CompaneresFragment"
+        android:label="CompaneresFragment"
+        tools:layout="@layout/fragment_companeres"/>
 </navigation>
