@@ -29,33 +29,14 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     private lateinit var viewModelFactory: SessionViewModelFactory
     private lateinit var binding: FragmentSplashBinding
 
-    private lateinit var aboutViewModelFactory: AboutViewModelFactory
-    private lateinit var aboutViewModel : AboutViewModel
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupDependencies()
         binding = FragmentSplashBinding.bind(view)
-        //setupLiveData()
+        setupLiveData()
     }
 
     private fun setupDependencies() {
-        aboutViewModelFactory = AboutViewModelFactory(
-            ObtainAboutUseCase(
-                RemoteAboutRepository(
-                    RetrofitHandler.getAboutApi(),
-                    AboutDataMapper()
-                )
-            )
-        )
-
-        aboutViewModel = ViewModelProvider(this, aboutViewModelFactory).get(AboutViewModel::class.java)
-        aboutViewModel.getLiveData().observe(
-            viewLifecycleOwner,
-            Observer { handleAboutState(it) }
-        )
-        aboutViewModel.obtainAbout()
-
         viewModelFactory = SessionViewModelFactory(
             ObtenerSessionUseCase(
                 FirebaseSessionRepository(
@@ -65,14 +46,6 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         )
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(SessionViewModel::class.java)
-    }
-
-    private fun handleAboutState(state: About?) {
-        if(state == null){
-            Toast.makeText(context, "Null", Toast.LENGTH_SHORT).show()
-        }else {
-            Toast.makeText(context, "State ${state.company}", Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun setupLiveData() {
@@ -92,13 +65,17 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     }
 
     private fun goToLoginFragment() {
-        Navigation.findNavController(requireView())
-            .navigate(R.id.action_splashFragment_to_loginFragment)
+        view?.let { safeView ->
+            Navigation.findNavController(safeView)
+                .navigate(R.id.action_splashFragment_to_loginFragment)
+        }
     }
 
     private fun goToBriskerosFragment() {
-        Navigation.findNavController(requireView())
-            .navigate(R.id.action_splashFragment_to_briskerosFragment)
+        view?.let { safeView ->
+            Navigation.findNavController(safeView)
+                .navigate(R.id.action_splashFragment_to_loginFragment)
+        }
     }
 
     private fun showLoadingSplash() {

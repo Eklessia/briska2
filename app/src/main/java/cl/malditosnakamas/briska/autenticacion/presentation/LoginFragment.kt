@@ -1,7 +1,9 @@
 package cl.malditosnakamas.briska.autenticacion.presentation
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -20,66 +22,73 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
-   /* private val repository: AutenticacionRepository = FirebaseAutenticacionRepository(
-        FirebaseAuth.getInstance()
-    )
-    private val viewModel by activityViewModels<LoginViewModel> { factory }
-    private lateinit var binding: FragmentLoginBinding
+     private lateinit var viewModelFactory: LoginViewModelFactory
+     private lateinit var viewModel: LoginViewModel
+     private lateinit var binding: FragmentLoginBinding
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = FragmentLoginBinding.bind(view)
-        setupLiveData()
-        setupListener()
-    }
+     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+         super.onViewCreated(view, savedInstanceState)
+         setupDependencies()
+         binding = FragmentLoginBinding.bind(view)
+         setupLiveData()
+         setupListener()
+     }
 
-    private fun setupListener() {
-
-        binding.apply {
-            btnLogin.setOnClickListener {
-                viewModel.doLogin(
-                    etEmailORut.text.toString(),
-                    etPass.text.toString()
+    private fun setupDependencies() {
+        viewModelFactory = LoginViewModelFactory(
+            LoginUsuarioPassUseCase(
+                FirebaseAutenticacionRepository(
+                    FirebaseAuth.getInstance()
                 )
-            }
-
-            btnRegistro.setOnClickListener {
-                Navigation.findNavController(it)
-                    .navigate(R.id.action_loginFragment_to_registrarUsuarioFragment)
-            }
-        }
-    }
-
-    private fun setupLiveData() {
-        viewModel.getLiveData().observe(
-            viewLifecycleOwner,
-            Observer { state -> state?.let { handleState(it) } }
+            )
         )
     }
 
-    private fun handleState(state: LoginUiState) {
-        when (state) {
-            is LoginUiState.Loading -> showLoading()
-            is LoginUiState.Success -> showSuccessView()
-            is LoginUiState.InvalidUser -> showInvalidUserView()
-            is LoginUiState.Error -> showError()
-        }
-    }
+    private fun setupListener() {
+         binding.apply {
+             btnLogin.setOnClickListener {
+                 viewModel.doLogin(
+                     etEmailORut.text.toString(),
+                     etPass.text.toString()
+                 )
+             }
 
-    private fun showError() {
-        alert("Error")
-    }
+             btnRegistro.setOnClickListener {
+                 Navigation.findNavController(it)
+                     .navigate(R.id.action_loginFragment_to_registrarUsuarioFragment)
+             }
+         }
+     }
 
-    private fun showInvalidUserView() {
-        alert("Usuario incorrecto")
-    }
+     private fun setupLiveData() {
+         viewModel.getLiveData().observe(
+             viewLifecycleOwner,
+             Observer { state -> state?.let { handleState(it) } }
+         )
+     }
 
-    private fun showSuccessView() {
-        alert("Login OK")
-    }
+     private fun handleState(state: LoginUiState) {
+         when (state) {
+             is LoginUiState.Loading -> showLoading()
+             is LoginUiState.Success -> showSuccessView()
+             is LoginUiState.InvalidUser -> showInvalidUserView()
+             is LoginUiState.Error -> showError()
+         }
+     }
 
-    private fun showLoading() {
-        alert("Cargando")
-    }
-*/
+     private fun showError() {
+         alert("Error")
+     }
+
+     private fun showInvalidUserView() {
+         alert("Usuario incorrecto")
+     }
+
+     private fun showSuccessView() {
+         alert("Login OK")
+     }
+
+     private fun showLoading() {
+         alert("Cargando")
+     }
 }

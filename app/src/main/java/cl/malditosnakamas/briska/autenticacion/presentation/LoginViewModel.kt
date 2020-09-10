@@ -9,8 +9,7 @@ import cl.malditosnakamas.briska.autenticacion.domain.UserAuth
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val loginUsuarioPassUseCase: LoginUsuarioPassUseCase,
-    private val handle: SavedStateHandle
+    private val loginUsuarioPassUseCase: LoginUsuarioPassUseCase
 ) : ViewModel() {
 
     private val liveData = MutableLiveData<LoginUiState>()
